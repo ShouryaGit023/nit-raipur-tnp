@@ -47,6 +47,8 @@ import cloudera from "@/assets/logos/cloudera.jpg";
 import swiggy from "@/assets/logos/swiggy.jpg";
 import ge from "@/assets/logos/ge-healthcare.jpg";
 import amazon from "@/assets/logos/amazon.jpg";
+import google from "@/assets/logos/google.jpg";
+import microsoft from "@/assets/logos/microsoft.jpg";
 
 /* -------------------------------------------
    ✨ COMPLETE RECRUITERS DATA
@@ -95,6 +97,8 @@ const recruiters = [
   { name: "Swiggy", logo: swiggy },
   { name: "Fanatics", logo: fanatics },
   { name: "Sixt", logo: sixt },
+  { name: "Google", logo: google },
+  { name: "microsoft", logo: microsoft },
 ];
 
 /* -------------------------------------------
