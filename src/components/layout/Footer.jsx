@@ -20,7 +20,7 @@ const resourceLinks = [
 const socialLinks = [
   { icon: Facebook, href: "https://www.facebook.com/nit.raipur", label: "Facebook" },
   // { icon: Twitter, href: "https://twitter.com/niaboratory", label: "Twitter" },
-  { icon: Linkedin, href: "https://linkedin.com/school/nit-raipur", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/school/national-institute-of-technology-raipur/posts/?feedView=all", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/nit_raipur/", label: "Instagram" },
   // { icon: Youtube, href: "https://youtube.com/@nitraipur", label: "YouTube" },
 ];
