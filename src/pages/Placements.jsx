@@ -37,6 +37,8 @@ const placementData = {
   { name: "MIN", highest: 16.5, average: 10.77, median: 10, placed: 46, percentage: 54.7 },
   { name: "BME", highest: 15, average: 11.37, median: 10.5, placed: 6, percentage: 20 },
   { name: "BT",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 10 },
+  { name: "Arch",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 10 },
+  { name: "MCA",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 10 },
 ],
 
     sectorWise: [
@@ -67,6 +69,8 @@ const placementData = {
       { name: "MIN", highest: 16.5, average: 10.77, median: 10, placed: 23, percentage: 27.4},
       { name: "BME", highest: 15, average: 11.37, median: 10.5, placed: 6, percentage: 14 },
       { name: "BT",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 9 },
+      { name: "Arch",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 9 },
+      { name: "MCA",  highest: 13.6, average: 10.56, median: 10.8, placed: 4, percentage: 9 },
     ],
     sectorWise: [
       { name: "IT/Software", value: 48 },
@@ -96,6 +100,8 @@ const placementData = {
       { name: "MIN", highest: 13, average: 6.5, median: 5.4, placed: 60, percentage: 71.42 },
       { name: "BME", highest: 10, average: 5.6, median: 4.5, placed: 28, percentage: 48.2 },
       { name: "BT",  highest: 11, average: 5.9, median: 4.8, placed: 17, percentage: 34.7 },
+      { name: "Arch",  highest: 11, average: 5.9, median: 4.8, placed: 17, percentage: 34.7 },
+      { name: "MCA",  highest: 11, average: 5.9, median: 4.8, placed: 17, percentage: 34.7 },
     ],
     sectorWise: [
       { name: "IT/Software", value: 50 },
@@ -128,7 +134,32 @@ const branchFullNameMap = {
   BME: "Biomedical ",
   BT: "Biotechnology",
   MIN: "Mining ",
+  MCA: "Master in Computer Applications",
+  Arch:"Architecture",
+
 };
+
+// ✅custom tooltip
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const branchCode = payload[0].payload.name;
+    const fullName = branchFullNameMap[branchCode] || branchCode;
+
+    return (
+      // 👇 THIS div controls tooltip background
+      <div className="bg-white text-black border rounded-md p-3 shadow-lg">
+        <p className="font-semibold">
+          {fullName}
+        </p>
+        <p className="text-sm">
+          Placement Rate: {payload[0].value}%
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 
 
 const Placements = () => {
@@ -263,14 +294,23 @@ const Placements = () => {
             {/* Branch Chart */}
             <div className="bg-card p-6 rounded-2xl shadow-elegant">
               <h3 className="text-xl font-bold mb-6">Branch-wise Placement Rate</h3>
-              <ResponsiveContainer width="100%" height={350}>
+              <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={currentData.branchWise} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" domain={[0, 100]} />
-                  <YAxis dataKey="name" type="category" />
-                  <Tooltip formatter={(v) => [`${v}%`, "Placement Rate"]} />
-                  <Bar dataKey="percentage" fill="hsl(var(--primary))" />
-                </BarChart>
+  <CartesianGrid strokeDasharray="3 3" />
+
+  <XAxis type="number" domain={[0, 100]} />
+
+  <YAxis
+    dataKey="name"
+    type="category"
+    interval={0}
+  />
+
+  <Tooltip content={<CustomTooltip />} />
+
+  <Bar dataKey="percentage" fill="hsl(var(--primary))" />
+</BarChart>
+
               </ResponsiveContainer>
             </div>
 
