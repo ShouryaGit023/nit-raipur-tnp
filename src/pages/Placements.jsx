@@ -139,6 +139,28 @@ const branchFullNameMap = {
 
 };
 
+// ✅custom tooltip
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const branchCode = payload[0].payload.name;
+    const fullName = branchFullNameMap[branchCode] || branchCode;
+
+    return (
+      // 👇 THIS div controls tooltip background
+      <div className="bg-white text-black border rounded-md p-3 shadow-lg">
+        <p className="font-semibold">
+          {fullName}
+        </p>
+        <p className="text-sm">
+          Placement Rate: {payload[0].value}%
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+
 
 const Placements = () => {
   const [selectedBatch, setSelectedBatch] = useState("2025");
@@ -272,14 +294,23 @@ const Placements = () => {
             {/* Branch Chart */}
             <div className="bg-card p-6 rounded-2xl shadow-elegant">
               <h3 className="text-xl font-bold mb-6">Branch-wise Placement Rate</h3>
-              <ResponsiveContainer width="100%" height={350}>
+              <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={currentData.branchWise} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" domain={[0, 100]} />
-                  <YAxis dataKey="name" type="category" />
-                  <Tooltip formatter={(v) => [`${v}%`, "Placement Rate"]} />
-                  <Bar dataKey="percentage" fill="hsl(var(--primary))" />
-                </BarChart>
+  <CartesianGrid strokeDasharray="3 3" />
+
+  <XAxis type="number" domain={[0, 100]} />
+
+  <YAxis
+    dataKey="name"
+    type="category"
+    interval={0}
+  />
+
+  <Tooltip content={<CustomTooltip />} />
+
+  <Bar dataKey="percentage" fill="hsl(var(--primary))" />
+</BarChart>
+
               </ResponsiveContainer>
             </div>
 
